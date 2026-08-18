@@ -1,0 +1,17 @@
+pandas
+openpyxl
+python-dotenv
+openai
+qdrant-client
+llama-index-core
+llama-index-embeddings-huggingface
+llama-index-vector-stores-qdrant
+requests
+trafilatura
+pymupdf
+
+# --- dashboard ---
+streamlit
+plotly
+scikit-learn
+umap-learn
