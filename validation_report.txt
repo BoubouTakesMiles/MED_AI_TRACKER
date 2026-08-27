@@ -1,0 +1,37 @@
+Total rows: 476
+Indexed: 476
+Excluded (mismatch found): 0
+
+By country:
+  Algeria: 65
+  Egypt: 113
+  France: 40
+  Italy: 30
+  Lebanon: 24
+  Morocco: 89
+  Spain: 30
+  Tunisia: 85
+
+By verification status:
+  Not yet verified: 91
+  Verified: 385
+
+By entity type:
+  Hub: 177
+  Investor: 38
+  Policy: 80
+  Startup: 181
+
+By application sector:
+  Agriculture: 20
+  Cross-sector: 68
+  Education: 94
+  Energy: 4
+  Finance: 75
+  Government: 64
+  Healthcare: 24
+  Industry: 126
+  Maritime: 1
+
+Flags:
+  none

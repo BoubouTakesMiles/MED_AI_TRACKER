@@ -1,16 +1,18 @@
 """
-STEP 3 - Load the FETCHED PAGE CONTENT into Qdrant (second collection).
+STEP 3 - Load fetched page content into Qdrant. INCREMENTAL.
 
-This is the semantic-depth layer: full articles / strategy PDFs, chunked.
-The crucial move: every chunk inherits the metadata of the dataset row(s)
-that cited its URL (country, application sector, entity name...), so a
-semantic hit on page text can still be filtered by "Lebanon + Healthcare".
+Only chunks from newly fetched or changed pages get embedded. This is the
+step that used to re-embed everything (20+ minutes); now adding 20 URLs
+costs about a minute.
 
-Run AFTER 01_fetch_pages.py and 02_ingest_entities.py.
-Re-runnable: drops and rebuilds the collection.
+  python 03_ingest_pages.py             # incremental
+  python 03_ingest_pages.py --rebuild   # wipe and redo everything
+
+Run AFTER 01_fetch_pages.py.
 """
 
 import hashlib
+import sys
 from pathlib import Path
 
 import pandas as pd
@@ -19,67 +21,107 @@ from qdrant_client.models import Distance, VectorParams, PointStruct, PayloadSch
 from llama_index.core.node_parser import SentenceSplitter
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 
-XLSX = "tracking_dataset_v4.xlsx"
+from pipeline_common import stable_id, content_hash, existing_hashes, plan, report
+
+XLSX = "tracking_dataset_v5.xlsx"
 CORPUS = Path("corpus")
 COLLECTION = "ai_pages"
+REBUILD = "--rebuild" in sys.argv
 
 
 def url_id(url: str) -> str:
+    """Matches the filename scheme used by 01_fetch_pages.py."""
     return hashlib.sha1(url.encode()).hexdigest()[:16]
 
 
-df = pd.read_excel(XLSX, sheet_name="Dataset").fillna("")
+def ensure_collection(client):
+    if client.collection_exists(COLLECTION):
+        return
+    client.create_collection(
+        collection_name=COLLECTION,
+        vectors_config=VectorParams(size=1024, distance=Distance.COSINE),
+    )
+    for field in ("countries", "app_sectors"):
+        client.create_payload_index(COLLECTION, field_name=field,
+                                    field_schema=PayloadSchemaType.KEYWORD)
 
-# map each URL -> the metadata of the rows that cite it
-url_meta = {}
-for _, row in df.iterrows():
-    url = str(row["Source URL"]).strip()
-    if not url.startswith("http"):
-        continue
-    m = url_meta.setdefault(url, {"countries": set(), "app_sectors": set(), "entities": set()})
-    m["countries"].add(str(row["Country"]))
-    m["app_sectors"].add(str(row["Application Sector"]))
-    m["entities"].add(str(row["Entity / Innovation Name"]))
 
-print("Loading embedding model...")
-embed = HuggingFaceEmbedding(model_name="BAAI/bge-m3")
-splitter = SentenceSplitter(chunk_size=800, chunk_overlap=100)
+def main():
+    df = pd.read_excel(XLSX, sheet_name="Dataset").fillna("")
 
-client = qdrant_client.QdrantClient(host="localhost", port=6333)
-if client.collection_exists(COLLECTION):
-    client.delete_collection(COLLECTION)
-client.create_collection(
-    collection_name=COLLECTION,
-    vectors_config=VectorParams(size=1024, distance=Distance.COSINE),
-)
-# country/app_sector are LISTS here (one page can back rows from
-# several countries) - Qdrant keyword filters match "value in list"
-for field in ("countries", "app_sectors"):
-    client.create_payload_index(COLLECTION, field_name=field,
-                                field_schema=PayloadSchemaType.KEYWORD)
+    url_meta = {}
+    for _, row in df.iterrows():
+        url = str(row["Source URL"]).strip()
+        if not url.startswith("http"):
+            continue
+        m = url_meta.setdefault(url, {"countries": set(), "app_sectors": set(),
+                                      "entities": set()})
+        m["countries"].add(str(row["Country"]))
+        m["app_sectors"].add(str(row["Application Sector"]))
+        m["entities"].add(str(row["Entity / Innovation Name"]))
 
-points, pid = [], 0
-files = 0
-for url, meta in url_meta.items():
-    txt_file = CORPUS / f"{url_id(url)}.txt"
-    if not txt_file.exists():
-        continue  # skipped / failed fetch - fine
-    files += 1
-    text = txt_file.read_text(encoding="utf-8")
-    for chunk in splitter.split_text(text):
-        payload = {
-            "url": url,
-            "countries": sorted(meta["countries"]),
-            "app_sectors": sorted(meta["app_sectors"]),
-            "entities": sorted(meta["entities"]),
-            "text": chunk,
-        }
-        points.append(PointStruct(id=pid, vector=embed.get_text_embedding(chunk), payload=payload))
-        pid += 1
-    if files % 20 == 0:
-        print(f"  {files} pages -> {pid} chunks so far...")
+    splitter = SentenceSplitter(chunk_size=800, chunk_overlap=100)
 
-for start in range(0, len(points), 100):
-    client.upsert(collection_name=COLLECTION, points=points[start:start + 100])
+    # desired state: chunk_id -> (hash, payload)
+    desired, pages = {}, 0
+    for url, meta in url_meta.items():
+        f = CORPUS / f"{url_id(url)}.txt"
+        if not f.exists():
+            continue
+        pages += 1
+        text = f.read_text(encoding="utf-8")
+        for i, chunk in enumerate(splitter.split_text(text)):
+            cid = stable_id(url, i)
+            payload = {
+                "url": url,
+                "countries": sorted(meta["countries"]),
+                "app_sectors": sorted(meta["app_sectors"]),
+                "entities": sorted(meta["entities"]),
+                "text": chunk,
+                "chunk_index": i,
+            }
+            # hash covers the chunk AND its metadata, so a row edit that
+            # changes a page's country/sector tags triggers a refresh too
+            payload["_hash"] = content_hash(
+                chunk + "|" + ",".join(payload["countries"]) +
+                "|" + ",".join(payload["app_sectors"]))
+            desired[cid] = (payload["_hash"], payload)
 
-print(f"\nDone. {files} pages -> {pid} chunks in '{COLLECTION}'.")
+    print(f"{pages} fetched pages -> {len(desired)} chunks desired.")
+
+    client = qdrant_client.QdrantClient(host="localhost", port=6333)
+    if REBUILD and client.collection_exists(COLLECTION):
+        print("--rebuild: dropping the collection.")
+        client.delete_collection(COLLECTION)
+    ensure_collection(client)
+
+    stored = existing_hashes(client, COLLECTION)
+    to_write, to_delete, unchanged = plan({k: v[0] for k, v in desired.items()}, stored)
+
+    print(f"{len(to_write)} chunks to embed, {unchanged} unchanged, "
+          f"{len(to_delete)} to remove.")
+    if not to_write and not to_delete:
+        print("Nothing to do. Collection already matches the corpus.")
+    else:
+        if to_write:
+            print("Loading embedding model...")
+            embed = HuggingFaceEmbedding(model_name="BAAI/bge-m3")
+            points = []
+            for n, cid in enumerate(to_write, 1):
+                _, payload = desired[cid]
+                points.append(PointStruct(
+                    id=cid,
+                    vector=embed.get_text_embedding(payload["text"]),
+                    payload=payload))
+                if n % 50 == 0:
+                    print(f"  {n}/{len(to_write)}")
+            for s in range(0, len(points), 100):
+                client.upsert(collection_name=COLLECTION, points=points[s:s + 100])
+        if to_delete:
+            client.delete(collection_name=COLLECTION, points_selector=to_delete)
+
+    report("page chunks", len(to_write), len(to_delete), unchanged)
+
+
+if __name__ == "__main__":
+    main()
