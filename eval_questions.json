@@ -1,0 +1,150 @@
+{
+  "_readme": "Evaluation set for the AI tracker. Each question declares what SHOULD be retrieved. 'expected_names' are entity names that must appear in the top-k results. 'category' groups questions for reporting. Out-of-scope questions have no expected results: the system passes by NOT confidently answering them. Edit freely as the dataset grows.",
+
+  "questions": [
+    {
+      "id": "Q01",
+      "category": "single_sector",
+      "question": "Which startups work on medical imaging?",
+      "country_filter": null,
+      "expected_names": ["Intixel", "Rology"],
+      "notes": "Both Egyptian, both Health/Imaging. Core sanity check."
+    },
+    {
+      "id": "Q02",
+      "category": "single_sector",
+      "question": "What companies use AI for medical diagnostics?",
+      "country_filter": null,
+      "expected_names": ["DilenyTech", "IRRI Vision"],
+      "notes": "Tests that 'diagnostics' retrieves the Diagnostics sub-sector, not just Imaging."
+    },
+    {
+      "id": "Q03",
+      "category": "country_filtered",
+      "question": "What AI health startups exist in Lebanon?",
+      "country_filter": "Lebanon",
+      "expected_names": ["Medicus AI"],
+      "notes": "Tests the country filter. Without it, Egyptian health startups dominate."
+    },
+    {
+      "id": "Q04",
+      "category": "policy",
+      "question": "What is Morocco's national AI strategy?",
+      "country_filter": "Morocco",
+      "expected_names": ["Maroc IA 2030 (AI Made in Morocco)", "Digital Morocco 2030 (National AI Synthesis)"],
+      "notes": "Policy retrieval, the most common real-world query type."
+    },
+    {
+      "id": "Q05",
+      "category": "policy",
+      "question": "Which body regulates personal data and AI in Morocco?",
+      "country_filter": "Morocco",
+      "expected_names": ["CNDP - AI & Personal Data Framework"],
+      "notes": "Narrow policy question; tests precision, not just recall."
+    },
+    {
+      "id": "Q06",
+      "category": "investors",
+      "question": "Which venture capital firms invest in AI startups in Tunisia?",
+      "country_filter": "Tunisia",
+      "expected_names": ["216 Capital", "AfricInvest"],
+      "notes": "Entity-type retrieval by function rather than by keyword."
+    },
+    {
+      "id": "Q07",
+      "category": "agriculture",
+      "question": "Is anyone using computer vision for crop disease detection?",
+      "country_filter": null,
+      "expected_names": ["FarmAI (SevenG)"],
+      "notes": "Question shares almost no vocabulary with the record ('wheat-rust detection'). Tests semantic rather than keyword matching."
+    },
+    {
+      "id": "Q08",
+      "category": "agriculture",
+      "question": "What precision farming initiatives exist in Egypt?",
+      "country_filter": "Egypt",
+      "expected_names": ["AgriCan"],
+      "notes": null
+    },
+    {
+      "id": "Q09",
+      "category": "maritime",
+      "question": "Is AI being applied to ports and maritime logistics?",
+      "country_filter": null,
+      "expected_names": ["Tanger Med x UM6P AI Program (1337 MED)", "Smart Port Challenge (PortNet / ANP)"],
+      "notes": "Maritime is the thinnest sector (14 records). Tests retrieval in a sparse region of the dataset."
+    },
+    {
+      "id": "Q10",
+      "category": "maritime",
+      "question": "Are there autonomous maritime drones in the region?",
+      "country_filter": null,
+      "expected_names": ["IRIS (Tunisian maritime surface drone)"],
+      "notes": "Single correct answer; a hard precision test."
+    },
+    {
+      "id": "Q11",
+      "category": "events",
+      "question": "What AI hackathons are held in Algeria?",
+      "country_filter": "Algeria",
+      "expected_names": ["Djazairia Challenge 2025 - IA for Good", "Algeria Startup Challenge (ASC)"],
+      "notes": "Tests an entity type that is easy to confuse with conferences."
+    },
+    {
+      "id": "Q12",
+      "category": "multilingual",
+      "question": "Quelles startups marocaines utilisent l'intelligence artificielle dans l'agriculture ?",
+      "country_filter": "Morocco",
+      "expected_names": [],
+      "notes": "SCORED MANUALLY. French question against a mostly English corpus. Pass = returns Moroccan agriculture records. This is the cross-lingual claim in the report; it needs evidence."
+    },
+    {
+      "id": "Q13",
+      "category": "multilingual",
+      "question": "ما هي الشركات الناشئة في مجال الذكاء الاصطناعي في مصر؟",
+      "country_filter": "Egypt",
+      "expected_names": [],
+      "notes": "SCORED MANUALLY. Arabic question ('What AI startups exist in Egypt?'). Pass = returns Egyptian startups."
+    },
+    {
+      "id": "Q14",
+      "category": "out_of_scope",
+      "question": "Which Japanese AI startups work on robotics?",
+      "country_filter": null,
+      "expected_names": [],
+      "notes": "PASS = the system states it has no data on Japan. FAIL = it answers with Mediterranean entities as though they were Japanese, or invents Japanese ones."
+    },
+    {
+      "id": "Q15",
+      "category": "out_of_scope",
+      "question": "What is the capital of France?",
+      "country_filter": null,
+      "expected_names": [],
+      "notes": "PASS = declines as out of scope. FAIL = answers from the model's own knowledge, which proves the grounding constraint is not holding."
+    },
+    {
+      "id": "Q16",
+      "category": "out_of_scope",
+      "question": "How much revenue did Rology generate in 2025?",
+      "country_filter": null,
+      "expected_names": [],
+      "notes": "PASS = retrieves Rology but states that revenue is not in the dataset. FAIL = invents a figure. The hardest and most important refusal test: the entity exists, the fact does not."
+    },
+    {
+      "id": "Q17",
+      "category": "verification_awareness",
+      "question": "Tell me about AI startups whose information has not been fully verified.",
+      "country_filter": null,
+      "expected_names": [],
+      "notes": "SCORED MANUALLY. PASS = the answer surfaces verification status. Tests that the caveat embedded in the chunk actually reaches the model."
+    },
+    {
+      "id": "Q18",
+      "category": "comparative",
+      "question": "Compare the AI research capacity of Algeria and Egypt.",
+      "country_filter": null,
+      "expected_names": [],
+      "notes": "SCORED MANUALLY. PASS = returns R&D entities from both countries and notes the difference in composition. Tests the comparative answer mode."
+    }
+  ]
+}

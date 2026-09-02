@@ -11,6 +11,8 @@ __pycache__/
 cache/
 corpus/
 fetch_manifest.csv
+charts/
+
 
 # OS junk
 Thumbs.db

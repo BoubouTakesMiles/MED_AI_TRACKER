@@ -1,0 +1,31 @@
+RETRIEVAL VALIDATION REPORT
+==============================================
+Collection size        : 476 entities
+Automatically scored   : 11
+Average Recall@5      : 59.1%
+Fully correct          : 5/11
+Manual review required : 7
+
+Mean top score in-scope     : 0.659
+Mean top score out-of-scope : 0.569
+Separation                  : +0.090
+
+Per-question:
+  Q01    1.00  Which startups work on medical imaging?
+  Q02    0.50  What companies use AI for medical diagnostics?
+  Q03    0.00  What AI health startups exist in Lebanon?
+  Q04    1.00  What is Morocco's national AI strategy?
+  Q05    1.00  Which body regulates personal data and AI in Morocco?
+  Q06    0.50  Which venture capital firms invest in AI startups in T
+  Q07    1.00  Is anyone using computer vision for crop disease detec
+  Q08    1.00  What precision farming initiatives exist in Egypt?
+  Q09    0.00  Is AI being applied to ports and maritime logistics?
+  Q10    0.00  Are there autonomous maritime drones in the region?
+  Q11    0.50  What AI hackathons are held in Algeria?
+  Q12  manual  Quelles startups marocaines utilisent l'intelligence a
+  Q13  manual  ما هي الشركات الناشئة في مجال الذكاء الاصطناعي في مصر؟
+  Q14  manual  Which Japanese AI startups work on robotics?
+  Q15  manual  What is the capital of France?
+  Q16  manual  How much revenue did Rology generate in 2025?
+  Q17  manual  Tell me about AI startups whose information has not be
+  Q18  manual  Compare the AI research capacity of Algeria and Egypt.
