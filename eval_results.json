@@ -1,12 +1,12 @@
 {
-  "collection_size": 476,
+  "collection_size": 636,
   "top_k": 5,
-  "average_recall": 0.5909090909090909,
-  "fully_correct": 5,
+  "average_recall": 0.8636363636363636,
+  "fully_correct": 9,
   "scored_questions": 11,
   "manual_questions": 7,
-  "mean_top_score_in_scope": 0.6587272727272727,
-  "mean_top_score_out_of_scope": 0.569,
+  "mean_top_score_in_scope": 0.6711818181818182,
+  "mean_top_score_out_of_scope": 0.5643333333333334,
   "results": [
     {
       "id": "Q01",
@@ -21,37 +21,37 @@
       "scoring": "automatic",
       "retrieved": [
         "Intixel",
-        "Rology",
         "Biorce",
-        "DilenyTech",
-        "SYGMA.AI"
+        "Medicus AI",
+        "Rology",
+        "DilenyTech"
       ],
       "retrieved_countries": [
         "Egypt",
-        "Egypt",
         "Spain",
+        "Lebanon",
         "Egypt",
-        "Morocco"
+        "Egypt"
       ],
       "retrieved_snippets": [
         "Medical image processing software using AI to assist radiologists in the early detection of breast cancer.",
-        "On-demand teleradiology platform integrating Artificial Intelligence directly into both the clinical and operational layers of teleradiology. connecting hospitals with remote radio",
         "Barcelona startup using AI to accelerate clinical-trial design and patient recruitment.",
-        "Specializes in AI-enabled breast imaging to improve cancer detection rates and reduce diagnostic errors.",
-        "Moroccan startup offering an AI/ML solution that detects vehicle damage and estimates repair cost from a single photo."
+        "AI platform interpreting blood tests and medical reports into patient-friendly insights, also serving diagnostic labs and insurers. Founded 2015; HQ Vienna with a major Beirut engi",
+        "On-demand teleradiology platform integrating Artificial Intelligence directly into both the clinical and operational layers of teleradiology. connecting hospitals with remote radio",
+        "Specializes in AI-enabled breast imaging to improve cancer detection rates and reduce diagnostic errors."
       ],
       "scores": [
-        0.626,
-        0.585,
-        0.585,
-        0.584,
-        0.577
+        0.617,
+        0.582,
+        0.58,
+        0.578,
+        0.576
       ],
-      "top_score": 0.626,
+      "top_score": 0.617,
       "recall": 1.0,
       "ranks": [
         1,
-        2
+        4
       ],
       "missing": []
     },
@@ -68,38 +68,37 @@
       "scoring": "automatic",
       "retrieved": [
         "Universal Diagnostics",
-        "Aqemia",
-        "DilenyTech",
+        "Medicus AI",
         "Biorce",
-        "DataPathology"
+        "AI Diagnosis Vision",
+        "Aqemia"
       ],
       "retrieved_countries": [
         "Spain",
-        "France",
-        "Egypt",
+        "Lebanon",
         "Spain",
-        "Morocco"
+        "Tunisia",
+        "France"
       ],
       "retrieved_snippets": [
         "Spanish company developing blood-based early cancer detection, supported by government-backed funding.",
-        "Paris company combining quantum-inspired physics and deep learning to generate drug candidates for pharmaceutical partners.",
-        "Specializes in AI-enabled breast imaging to improve cancer detection rates and reduce diagnostic errors.",
+        "AI platform interpreting blood tests and medical reports into patient-friendly insights, also serving diagnostic labs and insurers. Founded 2015; HQ Vienna with a major Beirut engi",
         "Barcelona startup using AI to accelerate clinical-trial design and patient recruitment.",
-        "Founded 2020; uses AI and digital pathology for faster, more accurate cancer diagnosis (incl. cervical cancer) in underserved regions; raised $1M from Azur Innovation Fund (2023)."
+        "Tunisian e-health startup founded in 2021 by dentists Saoussen Ayari, Koussal Barhoumi and Lynda Sboui with AI specialist Anouar Nechi; its web platform analyzes panoramic jaw X-ra",
+        "Paris company combining quantum-inspired physics and deep learning to generate drug candidates for pharmaceutical partners."
       ],
       "scores": [
-        0.615,
-        0.583,
-        0.582,
-        0.58,
-        0.568
+        0.61,
+        0.601,
+        0.577,
+        0.576,
+        0.574
       ],
-      "top_score": 0.615,
-      "recall": 0.5,
-      "ranks": [
-        3
-      ],
+      "top_score": 0.61,
+      "recall": 0.0,
+      "ranks": [],
       "missing": [
+        "DilenyTech",
         "IRRI Vision"
       ]
     },
@@ -114,11 +113,11 @@
       "notes": "Tests the country filter. Without it, Egyptian health startups dominate.",
       "scoring": "automatic",
       "retrieved": [
-        "Proximie",
-        "Revotonix",
+        "Medicus AI",
+        "Rhazes AI pilot at Al Hamshari Hospital",
         "Neotic",
-        "Beirut AI",
-        "Anghami"
+        "Lebanon Tech, AI & Innovation Summit 2025 (LTAI)",
+        "Revotonix"
       ],
       "retrieved_countries": [
         "Lebanon",
@@ -128,25 +127,25 @@
         "Lebanon"
       ],
       "retrieved_snippets": [
-        "Connected-surgery platform combining augmented reality, AI and ML to let surgeons virtually 'scrub in' to operating rooms worldwide; founded 2015-2016 by Lebanese surgeon Nadine Ha",
-        "Founded 2018 and described as the first startup in the Arab region developing fully autonomous mobile robots and mechatronics solutions; operates in Lebanon, UAE and Germany across",
+        "AI platform interpreting blood tests and medical reports into patient-friendly insights, also serving diagnostic labs and insurers. Founded 2015; HQ Vienna with a major Beirut engi",
+        "Pilot deployment (reported August 2025) of Rhazes AI's agentic clinical assistant at Al Hamshari Hospital near Ein el Hilweh, Lebanon's largest Palestinian refugee camp: the AI tra",
         "Lebanese fintech providing AI-driven trade ideas and backtesting tools for stock market decision-making.",
-        "Lebanese non-profit (since 2017) and the country's largest applied-AI community: bootcamps, AI Weekend, hackathons and university workshops to make AI tools and knowledge accessibl",
-        "Music-streaming platform founded in Beirut in 2012, using ML-driven recommendation and personalization; first Arab tech company listed on Nasdaq (2021), HQ since relocated to Abu D"
+        "Government (MITAI) flagship AI/tech summit held November 7, 2025 - the launch venue for Lebanon's National Digital Transformation and AI Strategy. Speakers included MEVP, Berytech,",
+        "Founded 2018 and described as the first startup in the Arab region developing fully autonomous mobile robots and mechatronics solutions; operates in Lebanon, UAE and Germany across"
       ],
       "scores": [
-        0.674,
-        0.667,
+        0.682,
+        0.673,
         0.66,
-        0.655,
-        0.652
+        0.656,
+        0.656
       ],
-      "top_score": 0.674,
-      "recall": 0.0,
-      "ranks": [],
-      "missing": [
-        "Medicus AI"
-      ]
+      "top_score": 0.682,
+      "recall": 1.0,
+      "ranks": [
+        1
+      ],
+      "missing": []
     },
     {
       "id": "Q04",
@@ -162,9 +161,9 @@
       "retrieved": [
         "Maroc IA 2030 (AI Made in Morocco)",
         "Digital Morocco 2030 (National AI Synthesis)",
+        "Assises Nationales de l'Intelligence Artificielle",
         "CNRST",
-        "Agence de Developpement du Digital (ADD)",
-        "AL-KHAWARIZMI R&D Program"
+        "Agence de Developpement du Digital (ADD)"
       ],
       "retrieved_countries": [
         "Morocco",
@@ -176,18 +175,18 @@
       "retrieved_snippets": [
         "National AI strategy led by the Ministry of Digital Transition, targeting a MAD 100bn GDP contribution, 50,000 AI jobs and 200,000 people trained by 2030, with a Jazari Institutes ",
         "Synthesis report from Morocco's First National AI Conference (Rabat, July 1-2, 2025), establishing eight foundational strategic pillars (trust & governance, sovereign infrastructur",
+        "Morocco's first national AI conference, held 1-2 July 2025 in Rabat under the Ministry of Digital Transition and Administration Reform, convening government, researchers and indust",
         "National scientific research center that administered Morocco's national AI applied-research call: 251 submissions evaluated, 45 AI projects selected (health, agriculture, industry",
-        "Government agency executing Morocco's digital strategy and coordinating national AI deployment; runs the Al-Khawarizmi applied-AI program and a dedicated AI ecosystem workstream.",
-        "Government program allocating 50 million dirhams to encourage applied scientific research in AI and its applications."
+        "Government agency executing Morocco's digital strategy and coordinating national AI deployment; runs the Al-Khawarizmi applied-AI program and a dedicated AI ecosystem workstream."
       ],
       "scores": [
-        0.788,
+        0.781,
         0.743,
-        0.698,
-        0.686,
-        0.673
+        0.72,
+        0.689,
+        0.684
       ],
-      "top_score": 0.788,
+      "top_score": 0.781,
       "recall": 1.0,
       "ranks": [
         1,
@@ -209,8 +208,8 @@
         "CNDP - AI & Personal Data Framework",
         "Agence de Developpement du Digital (ADD)",
         "Maroc IA 2030 (AI Made in Morocco)",
-        "Deloitte Morocco Cyber Center & CyberAcademy",
-        "Capgemini Morocco (AI MoU)"
+        "Assises Nationales de l'Intelligence Artificielle",
+        "MoroccoAI (Moroccan AI Society)"
       ],
       "retrieved_countries": [
         "Morocco",
@@ -223,17 +222,17 @@
         "Morocco's data-protection authority published an official position on AI and personal data (March 2025): AI systems using personal data must comply with Law 09-08 (transparency, pu",
         "Government agency executing Morocco's digital strategy and coordinating national AI deployment; runs the Al-Khawarizmi applied-AI program and a dedicated AI ecosystem workstream.",
         "National AI strategy led by the Ministry of Digital Transition, targeting a MAD 100bn GDP contribution, 50,000 AI jobs and 200,000 people trained by 2030, with a Jazari Institutes ",
-        "Deloitte's 2,000 sqm cyber center at Casablanca Finance City (2023) plus CyberAcademy (Sept 2025) with 60+ certification modules covering cybersecurity, data protection and AI appl",
-        "5,200+ employees in Casablanca/Rabat delivering cloud, data & AI and engineering services; signed an MoU with Morocco's Ministry of Digital Transition on AI development."
+        "Morocco's first national AI conference, held 1-2 July 2025 in Rabat under the Ministry of Digital Transition and Administration Reform, convening government, researchers and indust",
+        "Professional AI community focused on education, research and innovation; organises the annual MoroccoAI conference and meetups."
       ],
       "scores": [
-        0.728,
-        0.661,
-        0.656,
-        0.615,
-        0.615
+        0.721,
+        0.658,
+        0.646,
+        0.627,
+        0.624
       ],
-      "top_score": 0.728,
+      "top_score": 0.721,
       "recall": 1.0,
       "ranks": [
         1
@@ -254,9 +253,9 @@
       "retrieved": [
         "216 Capital",
         "ANAVA Fund of Funds",
-        "Deepera",
         "Flat6Labs Tunis",
-        "Datavora"
+        "Addvocate.AI",
+        "AfricInvest"
       ],
       "retrieved_countries": [
         "Tunisia",
@@ -266,27 +265,26 @@
         "Tunisia"
       ],
       "retrieved_snippets": [
-        "Venture capital firm (pre-seed and seed) focused on supporting tech and AI entrepreneurs in Southern Europe and Africa.",
+        "Venture capital firm (pre-seed and seed) providing funding to tech and AI startups and entrepreneurs in Southern Europe and Africa.",
         "Tunisia's first fund of funds (~EUR100M target), operated by Smart Capital under Startup Tunisia, investing in VC funds that back Tunisian tech and deep-tech/AI startups.",
-        "Tunis startup building AI research, portfolio-management, algorithmic-trading and stock-market analysis platforms for financial institutions.",
         "Tunis seed accelerator and early-stage fund (launched 2017) backing tech startups including AI ventures; closed a $10M Anava Seed Fund in 2021.",
-        "Tunis big-data/AI startup monitoring 2,000+ retailers in 50 countries; algorithms match products, analyze trends and predict market behavior; NVIDIA Inception member."
+        "Tunisian startup whose AI-powered sales performance platform analyzes and coaches B2B sales conversations; in September 2025 it raised a strategic seed investment from Tunis-based ",
+        "Tunis-HQ pan-African investment platform (1994) managing ~EUR1.1bn across 18 funds; Cathay AfricInvest Innovation Fund backs tech/AI-adjacent startups (e.g. GoMyCode)."
       ],
       "scores": [
-        0.711,
-        0.684,
-        0.664,
-        0.663,
-        0.662
+        0.716,
+        0.696,
+        0.679,
+        0.672,
+        0.67
       ],
-      "top_score": 0.711,
-      "recall": 0.5,
+      "top_score": 0.716,
+      "recall": 1.0,
       "ranks": [
-        1
+        1,
+        5
       ],
-      "missing": [
-        "AfricInvest"
-      ]
+      "missing": []
     },
     {
       "id": "Q07",
@@ -303,7 +301,7 @@
         "FarmAI (SevenG)",
         "LUXEED Robotics",
         "AgriCan",
-        "Zr3i"
+        "Qamhawey (Mahaseel Technologies)"
       ],
       "retrieved_countries": [
         "Morocco",
@@ -315,18 +313,18 @@
       "retrieved_snippets": [
         "Founded 2023 by El Mahdi Aboulmanadel; ML models detect 1,000+ plant diseases/pests across 80 crops from leaf photos (Morshida app, CropScan, drone/API tools); won Orange POESAM Mo",
         "Algerian agritech using AI computer vision and drones to automate wheat-rust detection; won 2nd prize ($100k) at Huawei Tech4Good 2023.",
-        "AUB-linked agritech startup building AI computer-vision systems for drones that distinguish weeds from crops in real time for targeted treatment; piloted with Lebanese vineyards an",
+        "Lebanese-founded agritech startup (founders Guadaluna Chaer, Fabio Bou Habib and Georgy Kassab) building an AI computer-vision robot that kills weeds with a precision laser instead",
         "AI and IoT-driven agricultural robotics startup founded in 2020 by Salem Ghanam, motivated by farmers suffering pesticide-related health issues. Pivoted from drone-based to ground-",
-        "SaaS using satellite imaging, remote sensing and AI for crop monitoring for smallholder farmers; MENA's first date-palm carbon MRV platform; founded 2021."
+        "AI-driven farming super-app by Cairo-based Mahaseel Technologies offering image-based crop disease detection, Egyptian-dialect voice interaction (speech-to-text/text-to-speech), yi"
       ],
       "scores": [
-        0.578,
+        0.584,
         0.575,
-        0.551,
-        0.529,
-        0.514
+        0.535,
+        0.528,
+        0.521
       ],
-      "top_score": 0.578,
+      "top_score": 0.584,
       "recall": 1.0,
       "ranks": [
         2
@@ -345,10 +343,10 @@
       "scoring": "automatic",
       "retrieved": [
         "AgriCan",
+        "Farmtopia",
         "Zr3i",
-        "Egrobots",
         "Microsoft Egypt - MCIT AI Collaborations",
-        "The AI Campus (New Cairo)"
+        "Qamhawey (Mahaseel Technologies)"
       ],
       "retrieved_countries": [
         "Egypt",
@@ -359,19 +357,19 @@
       ],
       "retrieved_snippets": [
         "AI and IoT-driven agricultural robotics startup founded in 2020 by Salem Ghanam, motivated by farmers suffering pesticide-related health issues. Pivoted from drone-based to ground-",
+        "Egyptian agritech platform using AI and IoT to automate farm processes from seeding to harvesting, providing soil insights, advanced analytics and automated irrigation with customi",
         "SaaS using satellite imaging, remote sensing and AI for crop monitoring for smallholder farmers; MENA's first date-palm carbon MRV platform; founded 2021.",
-        "Deep-tech robotics firm that built the Arab world's first fully Egyptian autonomous harvesting robot using computer vision and autonomous navigation; NVIDIA Inception member.",
         "Microsoft-MCIT partnership applying AI in agriculture (2019) and within DEBI; later MoU to train 100,000 Egyptian youth and government employees in AI.",
-        "500-acre AI Campus at Sumou Boulevard, New Cairo, launched via an MoU between Orange Egypt and real-estate developer Paragon | Adeer, in partnership with Plug and Play's global inn"
+        "AI-driven farming super-app by Cairo-based Mahaseel Technologies offering image-based crop disease detection, Egyptian-dialect voice interaction (speech-to-text/text-to-speech), yi"
       ],
       "scores": [
-        0.64,
-        0.599,
-        0.571,
-        0.568,
-        0.559
+        0.643,
+        0.623,
+        0.604,
+        0.604,
+        0.589
       ],
-      "top_score": 0.64,
+      "top_score": 0.643,
       "recall": 1.0,
       "ranks": [
         1
@@ -390,39 +388,40 @@
       "notes": "Maritime is the thinnest sector (14 records). Tests retrieval in a sparse region of the dataset.",
       "scoring": "automatic",
       "retrieved": [
-        "CloudFret",
-        "Freterium",
-        "MareNostrum 5 AI expansion",
-        "KubicBits",
-        "Trella"
+        "MARLOG 14 - International Maritime and Logistics Conference (AI edition)",
+        "Tunisian Customs AI Risk-Targeting Module",
+        "Smart Port Challenge (PortNet / ANP)",
+        "IMFMM Generative AI in Transport & Logistics Workshop",
+        "ALCES - Algerian Customs digital clearance & AI risk-management system"
       ],
       "retrieved_countries": [
+        "Egypt",
+        "Tunisia",
         "Morocco",
-        "Morocco",
-        "Spain",
-        "Morocco",
-        "Egypt"
+        "Tunisia",
+        "Algeria"
       ],
       "retrieved_snippets": [
-        "Logistics startup (2021) with an AI-driven SaaS marketplace matching shippers and carriers to reduce empty truck returns.",
-        "Y Combinator (S21) transport-management SaaS (2020) connecting shippers with their logistics ecosystem in real time.",
-        "EUR 90M investment under the AI Strategy 2024 creating specialised clusters that raise MareNostrum 5 capacity by nearly 50% to over 450 petaflops, with 20% of capacity reserved for",
-        "SaaS platform (KubicFleet) and AI-driven autonomous multi-agent architecture solutions for the management of logistics fleets.",
-        "AI-driven B2B technology platform connecting shippers with carriers, optimizing routes and pricing."
+        "14th edition of AASTMT's annual international maritime and logistics conference, held 23-25 February 2025 in Alexandria under the theme of how artificial intelligence can change th",
+        "Tunisia's General Directorate of Customs announced in May 2026 an AI module integrated into the national customs selectivity system that uses machine learning on goods nature, orig",
+        "Morocco's first port-sector open-innovation hackathon, organized by PORTNET S.A. and the Agence Nationale des Ports since 2019/2020; the 4th edition concluded at SIPORTS 2026 in Ca",
+        "High-level executive workshop (December 25-26, 2025, Tunis) organized by the Institut Mediterraneen de Formation aux Metiers Maritimes (IMFMM), the ISO 9001-certified maritime trai",
+        "Digital customs information system launched in late 2023 by the Direction Générale des Douanes: online declarations and payments, real-time cargo tracking, and AI-based risk manage"
       ],
       "scores": [
-        0.618,
-        0.588,
-        0.583,
-        0.58,
-        0.578
+        0.682,
+        0.658,
+        0.647,
+        0.637,
+        0.629
       ],
-      "top_score": 0.618,
-      "recall": 0.0,
-      "ranks": [],
+      "top_score": 0.682,
+      "recall": 0.5,
+      "ranks": [
+        3
+      ],
       "missing": [
-        "Tanger Med x UM6P AI Program (1337 MED)",
-        "Smart Port Challenge (PortNet / ANP)"
+        "Tanger Med x UM6P AI Program (1337 MED)"
       ]
     },
     {
@@ -436,39 +435,39 @@
       "notes": "Single correct answer; a hard precision test.",
       "scoring": "automatic",
       "retrieved": [
+        "IRIS (Tunisian maritime surface drone)",
         "ATLAN Space",
+        "Smart Port Challenge (PortNet / ANP)",
         "Civil Protection AI & Drones Modernisation Program",
-        "LUXEED Robotics",
-        "Oracle Cloud Casablanca Region",
-        "CloudFret"
+        "MARLOG 14 - International Maritime and Logistics Conference (AI edition)"
       ],
       "retrieved_countries": [
+        "Tunisia",
+        "Morocco",
         "Morocco",
         "Tunisia",
-        "Lebanon",
-        "Morocco",
-        "Morocco"
+        "Egypt"
       ],
       "retrieved_snippets": [
+        "Deep-tech venture led by AVIONAV founder Foued El Kamel that unveiled IRIS, presented as the first 100% Tunisian unmanned surface vehicle (USV), in July 2026. The drone offers remo",
         "Rabat startup (founded 2016) using AI for fully autonomous UAV/drone missions in environmental and marine monitoring; raised $1.1M Series A (Nov 2020) led by Maroc Numeric Fund II.",
+        "Morocco's first port-sector open-innovation hackathon, organized by PORTNET S.A. and the Agence Nationale des Ports since 2019/2020; the 4th edition concluded at SIPORTS 2026 in Ca",
         "~$51M AFD-financed government program to digitise Tunisia's 198 emergency number with 24 AI-equipped operation rooms plus drones and robots.",
-        "AUB-linked agritech startup building AI computer-vision systems for drones that distinguish weeds from crops in real time for targeted treatment; piloted with Lebanese vineyards an",
-        "First hyperscaler public-cloud region in Morocco (April 2026, hosted with N+ONE), giving local enterprises and public bodies in-country access to Oracle's generative-AI and multicl",
-        "Logistics startup (2021) with an AI-driven SaaS marketplace matching shippers and carriers to reduce empty truck returns."
+        "14th edition of AASTMT's annual international maritime and logistics conference, held 23-25 February 2025 in Alexandria under the theme of how artificial intelligence can change th"
       ],
       "scores": [
-        0.584,
-        0.522,
-        0.486,
-        0.486,
-        0.473
+        0.582,
+        0.567,
+        0.537,
+        0.523,
+        0.512
       ],
-      "top_score": 0.584,
-      "recall": 0.0,
-      "ranks": [],
-      "missing": [
-        "IRIS (Tunisian maritime surface drone)"
-      ]
+      "top_score": 0.582,
+      "recall": 1.0,
+      "ranks": [
+        1
+      ],
+      "missing": []
     },
     {
       "id": "Q11",
@@ -482,11 +481,11 @@
       "notes": "Tests an entity type that is easy to confuse with conferences.",
       "scoring": "automatic",
       "retrieved": [
-        "Huawei Algerie ICT Academy & ICT Competition",
-        "Algerian Olympiad in AI (AOAI)",
-        "Algeria 2.0",
+        "Artificial Intelligence and Entrepreneurship Hackathon - Algeria 2026 (Sidi Abdellah)",
+        "Concours National d'Intelligence Artificielle (Semaine nationale de l'IA 2025, Constantine)",
         "Algeria Startup Challenge (ASC)",
-        "DjazairIA"
+        "Défi de l'Agriculture Hackathon (ENSIA x ENSA)",
+        "Djazairia Challenge 2025 - IA for Good"
       ],
       "retrieved_countries": [
         "Algeria",
@@ -496,27 +495,26 @@
         "Algeria"
       ],
       "retrieved_snippets": [
-        "Huawei's Algerian university academies train students in AI, big data, cloud and 5G; a dedicated AI specialty launched in Algeria; Algerian students won the three grand prizes at t",
-        "National university AI olympiad under MESRS selecting/training students for the International Olympiad in AI; Algeria won 4 medals at the 2026 African AI Olympiad.",
-        "Long-running Algerian tech event (13th edition, 24-28 Nov 2026, Sidi Abdellah Cyberparc) with workshops and hackathons on AI, cloud, cybersecurity, web/mobile and SaaS.",
+        "38-hour national hackathon held 6-8 January 2026 at the Sidi Abdellah Scientific and Technological Hub, organized by 'Meeting of the Youth of Algeria' with the Ministry of Youth an",
+        "National AI competition launched 23 November 2025 at Université Frères Mentouri Constantine 1 during Algeria's National Week of AI and Scientific Research, gathering 60 innovative ",
         "Largest Algerian open-innovation startup program (created 2018); 7th edition final (24 Nov 2025, Sidi Fredj) with 16 finalists and panels on AI's structuring role in the national e",
-        "Algeria's first private incubator entirely dedicated to AI (launched Sept 2025); offers coworking, coaching, fundraising and a partnership with Toronto Metropolitan University's DM"
+        "Three-day national hackathon (2nd edition, June 2025, Algiers) organized by the National Higher School of AI (ENSIA) and the National Higher School of Agronomy with the Jardin d'Es",
+        "AI-for-impact challenge positioning AI as a development lever for Africa, run with the Printemps numerique organisation."
       ],
       "scores": [
-        0.684,
-        0.677,
-        0.673,
-        0.672,
-        0.661
+        0.765,
+        0.746,
+        0.73,
+        0.725,
+        0.718
       ],
-      "top_score": 0.684,
-      "recall": 0.5,
+      "top_score": 0.765,
+      "recall": 1.0,
       "ranks": [
-        4
+        5,
+        3
       ],
-      "missing": [
-        "Djazairia Challenge 2025 - IA for Good"
-      ]
+      "missing": []
     },
     {
       "id": "Q12",
@@ -527,11 +525,11 @@
       "notes": "SCORED MANUALLY. French question against a mostly English corpus. Pass = returns Moroccan agriculture records. This is the cross-lingual claim in the report; it needs evidence.",
       "scoring": "manual",
       "retrieved": [
+        "AgriTech4Morocco Innovation Challenge",
         "DeepLeaf",
+        "PCS Agri",
         "AgriEdge",
-        "Sand to Green",
-        "SOWIT",
-        "SQLI Maroc - Atlas Learning Hub"
+        "AGRI 4.0"
       ],
       "retrieved_countries": [
         "Morocco",
@@ -541,20 +539,20 @@
         "Morocco"
       ],
       "retrieved_snippets": [
+        "National open-innovation challenge (launched 2022) selecting Moroccan agritech startups (10 finalists in the first edition, including PCS Agri) to develop digital and AI solutions ",
         "Founded 2023 by El Mahdi Aboulmanadel; ML models detect 1,000+ plant diseases/pests across 80 crops from leaf photos (Morshida app, CropScan, drone/API tools); won Orange POESAM Mo",
+        "Moroccan agritech founded in 2022 building AI and IoT tools for yield estimation, pest management and seed tracking for Moroccan farmers; selected in the AgriTech4Morocco Innovatio",
         "UM6P business unit for precision agriculture combining agronomic models with AI, IoT and satellite data; serves 30,000+ farmers across 5 African countries.",
-        "Proprietary AI and satellite analysis (RegenWise) for monitoring arid soil restoration and carbon sequestration.using machine learning to solve the highly complex, unpredictable pr",
-        "Combining satellite remote sensing and soil sensors with agronomic AI models to optimize irrigation.",
-        "SQLI's Moroccan expertise center (900+ staff in Rabat, Casablanca, Oujda) working on data, AI and digital commerce; inaugurated the Atlas Learning Hub dedicated to AI skills."
+        "Agadir-based agritech founded in 2018 deploying IoT sensors, weather stations and predictive analytics for irrigation optimization, greenhouse climate monitoring, cold-chain tracea"
       ],
       "scores": [
-        0.647,
-        0.641,
-        0.612,
-        0.611,
-        0.603
+        0.671,
+        0.649,
+        0.648,
+        0.646,
+        0.645
       ],
-      "top_score": 0.647,
+      "top_score": 0.671,
       "recall": null,
       "verdict": null,
       "verdict_note": ""
@@ -568,11 +566,11 @@
       "notes": "SCORED MANUALLY. Arabic question ('What AI startups exist in Egypt?'). Pass = returns Egyptian startups.",
       "scoring": "manual",
       "retrieved": [
-        "Webville",
+        "MerQ",
         "AvidBeam",
         "Nanovate",
         "Valeo Egypt - Cairo Tech Hub & AI Development Center",
-        "MerQ"
+        "Webville"
       ],
       "retrieved_countries": [
         "Egypt",
@@ -582,20 +580,20 @@
         "Egypt"
       ],
       "retrieved_snippets": [
-        "Computer-vision deep-learning models for security, media, fashion and gaming; product Artville automates e-commerce photo editing.",
+        "AI + NLP financial virtual-assistant chatbots (e.g. 'Sally' for credit-card comparison); founded 2018, Cairo.",
         "AI video-analytics platform for smart cities, retail and security (crowd density, anomaly detection); started 2014.",
         "Cairo AI startup (founded 2025) building Arabic-language AI tools - chat and voice agents, CRM/ERP integrations and no-code deployment; raised $2M pre-seed.",
         "Valeo Cairo (~2,200 engineers, Smart Village) produces about half of the group's global automotive software; launched a dedicated AI Development Center (April 2026) for smart mobil",
-        "AI + NLP financial virtual-assistant chatbots (e.g. 'Sally' for credit-card comparison); founded 2018, Cairo."
+        "Computer-vision deep-learning models for security, media, fashion and gaming; product Artville automates e-commerce photo editing."
       ],
       "scores": [
-        0.552,
-        0.546,
-        0.539,
-        0.539,
-        0.538
+        0.548,
+        0.542,
+        0.541,
+        0.534,
+        0.533
       ],
-      "top_score": 0.552,
+      "top_score": 0.548,
       "recall": null,
       "verdict": null,
       "verdict_note": ""
@@ -612,8 +610,8 @@
         "AIKO",
         "Genesis AI",
         "UMA",
-        "Pollen Robotics",
-        "Alinia AI"
+        "Kyutai",
+        "Biorce"
       ],
       "retrieved_countries": [
         "Italy",
@@ -626,17 +624,17 @@
         "Turin startup building autonomy software for satellites and space missions, hiring from the local aerospace cluster; among Italy's top-funded AI companies.",
         "French startup generating synthetic training data for robotics, cited among the emerging second-wave AI companies.",
         "Paris humanoid robotics startup founded by former Tesla and Hugging Face engineers, part of the second wave of French AI companies.",
-        "Bordeaux humanoid robotics startup founded 2016 by Matthieu Lapeyre and Pierre Rouanet, acquired by Hugging Face in April 2025 as part of its open robotics strategy.",
-        "Barcelona company founded 2023 building a model-agnostic platform to evaluate AI guardrails, with an API for flagging, blocking, redacting and reporting. Raised $7.5M seed in Decem"
+        "Paris open-science AI research laboratory working on open-source models and voice AI, cited among France's leading AI organisations with a valuation around EUR 1bn.",
+        "Barcelona startup using AI to accelerate clinical-trial design and patient recruitment."
       ],
       "scores": [
-        0.594,
-        0.594,
-        0.566,
-        0.563,
+        0.601,
+        0.596,
+        0.573,
+        0.568,
         0.56
       ],
-      "top_score": 0.594,
+      "top_score": 0.601,
       "recall": null,
       "verdict": null,
       "verdict_note": ""
@@ -652,9 +650,9 @@
       "retrieved": [
         "STATION F",
         "3IA Interdisciplinary Institutes for Artificial Intelligence",
-        "French AI ecosystem (aggregate indicators)",
         "Bpifrance",
-        "Kyutai"
+        "IA Booster France 2030",
+        "French AI ecosystem (aggregate indicators)"
       ],
       "retrieved_countries": [
         "France",
@@ -666,18 +664,18 @@
       "retrieved_snippets": [
         "Paris startup campus, the largest in Europe, hosting a dense concentration of French AI companies including Hugging Face and Clipdrop, and running sector accelerator programmes.",
         "Network of AI research and training hubs created in 2019 (Grenoble, Nice, Paris, Toulouse), later extended through the AI Cluster initiative; each funds PhD and postdoctoral positi",
-        "Reference datapoint: France reports 1,000+ AI startups including 16 unicorns, EUR 1.9bn raised by French AI startups in 2024, 41 inbound AI investment projects, and rank as the top",
         "French public investment bank; co-operates France 2030 AI funding and is a direct shareholder in national AI champions including Mistral AI.",
-        "Paris open-science AI research laboratory working on open-source models and voice AI, cited among France's leading AI organisations with a valuation around EUR 1bn."
+        "National programme supporting AI adoption and digital transformation among French SMEs, run under the France 2030 plan with synergies sought with AI-focused European Digital Innova",
+        "Reference datapoint: France reports 1,000+ AI startups including 16 unicorns, EUR 1.9bn raised by French AI startups in 2024, 41 inbound AI investment projects, and rank as the top"
       ],
       "scores": [
-        0.488,
-        0.462,
-        0.458,
-        0.457,
+        0.483,
+        0.47,
+        0.463,
+        0.46,
         0.456
       ],
-      "top_score": 0.488,
+      "top_score": 0.483,
       "recall": null,
       "verdict": null,
       "verdict_note": ""
@@ -693,32 +691,32 @@
       "retrieved": [
         "Rology",
         "Murphy",
-        "YoLa Fresh",
         "Xoople",
-        "Brimore"
+        "Optimalogistic",
+        "YoLa Fresh"
       ],
       "retrieved_countries": [
         "Egypt",
         "Spain",
-        "Morocco",
         "Spain",
-        "Egypt"
+        "Tunisia",
+        "Morocco"
       ],
       "retrieved_snippets": [
         "On-demand teleradiology platform integrating Artificial Intelligence directly into both the clinical and operational layers of teleradiology. connecting hospitals with remote radio",
         "Barcelona platform replacing manual debt-collection work with AI, operating in 30+ countries with clients including KPMG and Grenke. Raised $15M in July 2025 led by Northzone.",
-        "Casablanca agritech (founded 2023) connecting smallholder farmers to retailers; $7M pre-Series A (May 2024, led by Al Mada Ventures); applying machine learning for demand forecasti",
         "Madrid company building a geospatial AI platform and dynamic digital twins from satellite imagery, with a strategic sensor partnership with L3Harris Technologies. Founded 2020, $28",
-        "Social commerce platform leveraging machine learning to predict demand, optimize supply chain, and match distributors."
+        "Tunisian logistics-tech startup using AI to optimize cross-border road freight between North Africa and Europe; it reportedly raised $157,000 from Kepple Africa Ventures.",
+        "Casablanca agritech (founded 2023) connecting smallholder farmers to retailers; $7M pre-Series A (May 2024, led by Al Mada Ventures); applying machine learning for demand forecasti"
       ],
       "scores": [
-        0.625,
-        0.445,
-        0.434,
+        0.609,
+        0.448,
         0.43,
-        0.417
+        0.429,
+        0.423
       ],
-      "top_score": 0.625,
+      "top_score": 0.609,
       "recall": null,
       "verdict": null,
       "verdict_note": ""
@@ -734,32 +732,32 @@
       "retrieved": [
         "IdentifAI",
         "Genesis AI",
-        "Unfrauded",
         "Neotic",
-        "Deepera"
+        "Neotic (Neotic.ai)",
+        "Unfrauded"
       ],
       "retrieved_countries": [
         "Italy",
         "France",
-        "Tunisia",
+        "Lebanon",
         "Lebanon",
         "Tunisia"
       ],
       "retrieved_snippets": [
         "Milan company building technology to determine whether digital content was created by humans or generated by AI.",
         "French startup generating synthetic training data for robotics, cited among the emerging second-wave AI companies.",
-        "Ariana startup (2019) with an AI tool detecting automotive-insurance fraud via 60+ fraud indicators and automating claim assessment.",
         "Lebanese fintech providing AI-driven trade ideas and backtesting tools for stock market decision-making.",
-        "Tunis startup building AI research, portfolio-management, algorithmic-trading and stock-market analysis platforms for financial institutions."
+        "Machine learning for financial markets - price-pattern recognition, news/fundamentals analysis, automated trading strategies. Based in Tripoli.",
+        "Ariana startup (2019) with an AI tool detecting automotive-insurance fraud via 60+ fraud indicators and automating claim assessment."
       ],
       "scores": [
-        0.609,
-        0.6,
-        0.596,
-        0.589,
-        0.587
+        0.622,
+        0.606,
+        0.605,
+        0.598,
+        0.597
       ],
-      "top_score": 0.609,
+      "top_score": 0.622,
       "recall": null,
       "verdict": null,
       "verdict_note": ""
@@ -775,9 +773,9 @@
       "retrieved": [
         "Algerian Olympiad in AI (AOAI)",
         "ERIA - Equipe de Recherche en Intelligence Artificielle",
-        "Huawei Algerie ICT Academy & ICT Competition",
+        "Maison de l'Intelligence Artificielle (House of AI)",
         "LMCS Laboratory - ESI Algiers",
-        "Maison de l'Intelligence Artificielle (House of AI)"
+        "Artificial Intelligence and Entrepreneurship Hackathon - Algeria 2026 (Sidi Abdellah)"
       ],
       "retrieved_countries": [
         "Algeria",
@@ -789,18 +787,18 @@
       "retrieved_snippets": [
         "National university AI olympiad under MESRS selecting/training students for the International Olympiad in AI; Algeria won 4 medals at the 2026 African AI Olympiad.",
         "AI research team within the Laboratoire d'Informatique (LRI) at Badji Mokhtar - Annaba University.",
-        "Huawei's Algerian university academies train students in AI, big data, cloud and 5G; a dedicated AI specialty launched in Algeria; Algerian students won the three grand prizes at t",
+        "Network of university 'AI Houses'; the first was inaugurated at University Alger 1 (Feb 2023) as collaborative AI-popularisation and research spaces, since expanded.",
         "Systems-design research laboratory (est. 1999) at ESI Algiers; six teams working on artificial intelligence, knowledge representation, classification, image processing and informat",
-        "Network of university 'AI Houses'; the first was inaugurated at University Alger 1 (Feb 2023) as collaborative AI-popularisation and research spaces, since expanded."
+        "38-hour national hackathon held 6-8 January 2026 at the Sidi Abdellah Scientific and Technological Hub, organized by 'Meeting of the Youth of Algeria' with the Ministry of Youth an"
       ],
       "scores": [
-        0.658,
-        0.658,
-        0.639,
-        0.638,
-        0.636
+        0.681,
+        0.656,
+        0.652,
+        0.649,
+        0.649
       ],
-      "top_score": 0.658,
+      "top_score": 0.681,
       "recall": null,
       "verdict": null,
       "verdict_note": ""

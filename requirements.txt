@@ -9,8 +9,6 @@ llama-index-vector-stores-qdrant
 requests
 trafilatura
 pymupdf
-
-# --- dashboard ---
 streamlit
 plotly
 scikit-learn

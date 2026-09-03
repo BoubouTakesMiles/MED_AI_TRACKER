@@ -2,17 +2,16 @@
 .env
 key.txt
 
-# python environment (huge, rebuildable from requirements.txt)
+# python environment (rebuildable from requirements.txt)
 venv/
 __pycache__/
 *.pyc
 
-# generated data (big, rebuildable by running the scripts)
+# generated data (rebuildable by running the scripts)
 cache/
 corpus/
 fetch_manifest.csv
-charts/
-
+dataset_quality_report.txt
 
 # OS junk
 Thumbs.db

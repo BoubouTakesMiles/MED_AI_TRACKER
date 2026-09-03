@@ -22,7 +22,9 @@ import qdrant_client
 from qdrant_client.models import Filter, FieldCondition, MatchValue
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 
-COLLECTION = "ai_entities"
+from pipeline_common import (connect, COLLECTION_ENTITIES as COLLECTION,
+                             EMBED_MODEL)
+
 EVAL_PATH = Path("eval_questions.json")
 TOP_K = 5
 OVER_FETCH = 30
@@ -54,8 +56,8 @@ def main():
     questions = spec["questions"]
 
     print("Loading embedding model...")
-    embed = HuggingFaceEmbedding(model_name="BAAI/bge-m3")
-    client = qdrant_client.QdrantClient(host="localhost", port=6333)
+    embed = HuggingFaceEmbedding(model_name=EMBED_MODEL)
+    client = connect()
     total = client.count(COLLECTION).count
     print(f"Collection '{COLLECTION}': {total} entities\n")
 

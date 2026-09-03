@@ -32,7 +32,7 @@ from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 
 st.set_page_config(page_title="AI Ecosystem Tracker", layout="wide")
 
-COLLECTION = "ai_entities"
+from pipeline_common import COLLECTION_ENTITIES as COLLECTION, EMBED_MODEL, COLLECTION_PAGES
 # Country / sector / entity-type vocabularies are derived from the data below.
 STATUS_COLOUR = {"Verified": "🟢", "Not yet verified": "🟡", "Mismatch found": "🔴"}
 
@@ -58,7 +58,7 @@ countries, say so. Answer in the language of the question. Be concise and factua
 # ------------------------------------------------------------------ resources
 @st.cache_resource(show_spinner="Loading embedding model (slow on first run)...")
 def get_embed():
-    return HuggingFaceEmbedding(model_name="BAAI/bge-m3")
+    return HuggingFaceEmbedding(model_name=EMBED_MODEL)
 
 
 @st.cache_resource
@@ -139,7 +139,7 @@ try:
     df = load_entities()
 except Exception as e:
     st.error(f"Cannot reach Qdrant collection '{COLLECTION}'.\n\n"
-             f"Check Docker is running and ingest_v3.py has been executed.\n\n{e}")
+             f"Check Docker is running and 2_ingest_entities.py has been run.\n\n{e}")
     st.stop()
 
 # Derived from what is actually in the collection, never hardcoded: a fixed list

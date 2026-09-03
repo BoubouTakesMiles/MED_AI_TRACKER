@@ -1,84 +1,249 @@
-# AI Tracker RAG — clean rebuild
+# MED AI Tracker
 
-Pipeline: **xlsx → (fetch pages) → Qdrant (2 collections) → Kimi answers with filters + sources.**
+A retrieval-augmented generation (RAG) system for querying the artificial
+intelligence ecosystem of the Mediterranean, built on a manually verified
+dataset of 637 records across eight countries. Every answer is assembled only
+from catalogued records and cites its sources; nothing is answered from the
+language model's own knowledge.
 
-## Folder layout (put everything in one folder, e.g. `rag_v2`)
+Built during a summer 2026 internship at the AI-Accelerated Research Centre
+(AI-ARC), Mohammed VI Polytechnic University, Ben Guerir.
+
+---
+
+## What it does
+
+Ask a question in plain language, get an answer grounded in verified records
+with a source URL and verification status attached to every claim.
 
 ```
-rag_v2/
-├── tracking_dataset_v4.xlsx    <- the dataset (single source of truth)
-├── requirements.txt
-├── .env                        <- your key (copy .env.example, fill it in)
-├── 01_fetch_pages.py
-├── 02_ingest_entities.py
-├── 03_ingest_pages.py
-├── 04_query.py
-├── cache/                      <- created automatically (raw downloads)
-└── corpus/                     <- created automatically (clean text)
+Which startups work on medical imaging?
+Quelles startups marocaines utilisent l'IA dans l'agriculture ?
+Compare the AI research capacity of Algeria and Egypt.
 ```
 
-## One-time setup
+Questions can be asked in English, French or Arabic. Retrieval works across
+languages: an English question retrieves French-language records describing the
+same thing, because matching is by meaning rather than keyword.
+
+---
+
+## The dataset
+
+`tracking_dataset.xlsx` — 637 records, eight countries.
+
+| Southern shore | | Northern shore | |
+|---|---|---|---|
+| Egypt | 142 | France | 40 |
+| Morocco | 113 | Italy | 30 |
+| Tunisia | 111 | Spain | 30 |
+| Algeria | 93 | | |
+| Lebanon | 78 | | |
+
+Covering startups, research laboratories, incubators and accelerators, funding
+bodies, national policies and strategies, hackathons, conferences and
+professional communities.
+
+Each record carries a source URL, a source type (primary, government, news,
+aggregator, secondary), an application sector, an entity type, a maturity
+indicator, and a **verification status**:
+
+- **Verified** — the cited source is primary or authoritative and confirms the claim
+- **Not yet verified** — the claim rests on a single aggregated source
+- **Mismatch found** — the source does not support the claim; excluded from the index
+
+The verification status is the point of the dataset. A funding figure copied
+from a startup directory and one confirmed against a company announcement are
+not equally reliable, and the dataset records which is which. That status is
+written into the text the model reads, so an unverified record is flagged in
+the answer rather than presented with false confidence.
+
+Current split: 565 verified, 71 not yet verified, 1 mismatch.
+
+The `Change Log` sheet documents how the dataset was assembled, including the
+merge of the five-country and northern-Mediterranean branches and every
+taxonomy mapping applied.
+
+---
+
+## Setup
+
+Requires Python 3.10+ and Docker.
 
 ```bash
-# 1. fresh virtual environment
 python -m venv venv
-venv\Scripts\activate          # Windows
+venv\Scripts\activate            # Windows
+source venv/bin/activate         # macOS / Linux
 
-# 2. install dependencies
 pip install -r requirements.txt
 
-# 3. API key: copy .env.example to .env, paste your Moonshot key.
-#    Then DELETE key.txt. A bare txt file with an API key is how keys leak.
-
-# 4. start Qdrant (Docker Desktop must be running)
+cp .env.example .env             # paste your Moonshot key into .env
 docker run -d -p 6333:6333 -v qdrant_storage:/qdrant/storage qdrant/qdrant
 ```
 
-The old `books_demo` and `ai_tracker` collections are dead weight now — either
-ignore them or delete them from the Qdrant dashboard (http://localhost:6333/dashboard).
+The first run downloads the BGE-M3 embedding model (~2 GB), once. After that
+everything runs locally on CPU at no per-query cost. Answer generation needs an
+API key; retrieval does not.
 
-## Run order
+Docker Desktop does not start automatically on Windows. A `WinError 10061`
+means the container is not running: `docker start <container-id>`.
 
-| Step | Command | What it does | Time |
-|---|---|---|---|
-| 1 | `python 01_fetch_pages.py` | Downloads + cleans the ~360 source pages (HTML via trafilatura, PDFs via pymupdf). Caches everything, skips Crunchbase/LinkedIn. | 10–20 min, re-runs are instant |
-| 2 | `python 02_ingest_entities.py` | 376 entities → collection `ai_entities`, every column as filterable payload + indexes. | ~5 min on CPU |
-| 3 | `python 03_ingest_pages.py` | Chunks the fetched pages → collection `ai_pages`. Each chunk inherits its row's country/sector metadata. | 15–30 min on CPU |
-| 4 | `python 04_query.py` | Ask questions. Searches both collections, Kimi answers with sources. | interactive |
+---
 
-Steps 1 and 3 are optional-but-recommended: step 2 + 4 alone already give you
-a working filtered tracker Q&A. Add the page layer when you have time.
+## Running it
 
-## Using the query tool
+Minimum to get a working system:
 
-```
-Question: country=Lebanon What does the national AI strategy target?
-Question: sector=Healthcare Which startups do medical imaging?
-Question: country=Morocco sector=Finance Who invests in AI startups?
-Question: Compare Arabic NLP work in Tunisia and Egypt
+```bash
+python 2_ingest_entities.py      # 637 records -> Qdrant, ~8 min on CPU
+streamlit run app.py
 ```
 
-Sector values: Education, Healthcare, Agriculture, Energy, Industry,
-Maritime, Finance, Government, Cross-sector.
+Full pipeline, including the text of the source pages themselves:
 
-## Expected reality checks
+```bash
+python run_pipeline.py           # fetch pages -> ingest records -> ingest chunks
+```
 
-- **Step 1 will show failures.** Dead links, paywalls, anti-bot pages — 20–30%
-  loss is normal. The manifest (`fetch_manifest.csv`) tells you exactly which
-  URLs failed and why. The tool works fine without them.
-- **First run of any script downloads bge-m3 (~2 GB), once.**
-- If `kimi-k2.6` errors, check the model name in the Moonshot console —
-  they rename models.
-- Re-running any ingest script is safe: collections are rebuilt from scratch.
+`run_pipeline.py` is incremental. Add rows to the spreadsheet and re-run: it
+fetches only new URLs and embeds only records whose content changed. Adding
+twenty records takes about a minute rather than half an hour. Records deleted
+from the spreadsheet are removed from the database.
 
-## What changed vs your old files
+Use `--rebuild` only after changing the chunk-construction template or the
+embedding model, since those invalidate every stored vector without changing
+the source text.
 
-- Scripts read the **xlsx directly** — your `urls_with_metadata.csv` was stale
-  (still had Libya, missing the Application Sector column). Delete it.
-- **Two collections, one query tool**: structured entities + page content,
-  searched together. Your old `query.py`/`query2.py` (books demo) are retired.
-- **Filters actually exist now** (`country=`, `sector=`), using the payload
-  indexes — this was the "no filters yet" TODO in your old `query_dataset.py`.
-- Payload keys are clean snake_case (`application_sector`, not
-  `"Application Sector"`), so filter code stays readable.
-- Temperature 0.3 instead of 1 — factual Q&A shouldn't be creative.
+Command line, without the dashboard:
+
+```bash
+python query.py "which startups work on medical imaging"
+python query.py --country Egypt --sector Health "AI diagnostics"
+python query.py --no-llm "AI in agriculture"     # retrieval only, no API key
+```
+
+---
+
+## The dashboard
+
+`streamlit run app.py` — six tabs:
+
+- **Search** — filtered semantic search with a grounded, cited answer
+- **Entity** — full record view, source link, nearest neighbours in vector space
+- **Compare** — two countries side by side, including startup-to-research ratio
+- **Map** — embedding projection, plus duplicate detection and candidate
+  misclassifications
+- **Overview** — composition, coverage matrix, thinnest cells
+- **Validation** — evaluation results, manual grading, export for reports
+
+The map's two analysis panels are quality-control tools rather than decoration.
+One surfaces near-identical records that may be duplicates; the other flags
+records whose description sits closer to another sector's centroid than to
+their own label. Neither proves an error, but both narrow 637 records to the
+handful worth re-reading.
+
+---
+
+## Validation
+
+```bash
+python evaluate.py
+```
+
+Runs a question set whose correct answers are declared in advance
+(`eval_questions.json`) and reports:
+
+- **Recall@5** on questions with known expected records
+- **Score separation** between in-scope and deliberately out-of-scope
+  questions. If out-of-scope questions scored as highly as in-scope ones, the
+  system would have no signal for telling apart what it knows from what it
+  does not.
+- **A manual review queue** for properties string matching cannot check:
+  refusal on unanswerable questions, cross-lingual retrieval, verification
+  awareness, comparative answers. These are graded in the dashboard's
+  Validation tab, saved to `eval_verdicts.json`, and folded into the headline
+  figures. The tab exports a CSV, a LaTeX table and a summary paragraph.
+
+The most informative test asks for a figure that does not exist about an entity
+that does. A system that invents a number there fails in the way that matters
+most.
+
+---
+
+## How it works
+
+```
+OFFLINE   spreadsheet -> prose passage per record -> BGE-M3 -> Qdrant
+          source URLs -> fetched text -> chunks -> Qdrant (metadata inherited)
+
+ONLINE    question -> embedding -> filtered vector search -> LLM -> cited answer
+```
+
+Three design decisions worth knowing:
+
+**Records are embedded as prose, not field values.** A record becomes *"FarmAI
+is a startup based in Algeria, working in Agriculture (Computer Vision).
+[description]. It has raised $100,000 in reported funding."* Questions are
+asked in prose, and passages shaped like the expected question retrieve better
+than comma-separated fields. Verification caveats are appended to the passage
+before embedding, so they reach the model automatically.
+
+**Metadata filtering happens in the database.** Entities doing similar work in
+different countries produce similar vectors, so semantic similarity alone does
+not respect country boundaries. Country and sector filters are indexed Qdrant
+payload conditions, not post-processing.
+
+**Retrieval is diversity-capped.** The system over-fetches, then admits at most
+two passages per source URL. Without this, one densely matching source occupies
+every slot and crowds out other relevant entities.
+
+---
+
+## Limitations
+
+- 71 records rest on a single aggregated source and are marked *Not yet
+  verified*. They are indexed, but flagged wherever they appear.
+- 116 records merged from the northern-Mediterranean branch have no maturity
+  value, because that branch did not record one. It was left blank rather than
+  inferred.
+- The dataset is a periodic snapshot with no automatic refresh. Funding figures
+  and organisational status go stale.
+- Maritime (14 records) and energy (22) are too thinly covered to support
+  conclusions.
+- Retrieval parameters were tuned against the same question set used to
+  evaluate them, so reported recall is optimistic.
+- Source-page fetching fails for roughly 20-30% of URLs: dead academic domains,
+  paywalls, anti-bot protection. Failures are logged in `fetch_manifest.csv`.
+
+---
+
+## Repository layout
+
+```
+tracking_dataset.xlsx     the dataset, with summary, charts and change log
+pipeline_common.py        shared config and incremental-ingestion helpers
+run_pipeline.py           runs the three steps below in order
+  1_fetch_pages.py          download and extract source page text
+  2_ingest_entities.py      records -> Qdrant (incremental)
+  3_ingest_pages.py         page chunks -> Qdrant (incremental)
+query.py                  command line; --no-llm for retrieval only
+evaluate.py               validation harness
+eval_questions.json       evaluation set with expected answers
+app.py                    Streamlit dashboard
+```
+
+The dataset filename and collection names are defined once in
+`pipeline_common.py`. Change them there and every script follows.
+
+---
+
+## Adding records
+
+1. Add rows to the spreadsheet, filling every column. A source URL is mandatory.
+2. Set the verification status honestly. If the only source is a startup
+   directory or a listicle, it is *Not yet verified*, however plausible it looks.
+3. Run `python run_pipeline.py`. Only what changed is processed.
+4. Run `python evaluate.py` to confirm nothing regressed.
+
+Blank maturity values, missing URLs and duplicate country+name pairs are
+reported in `dataset_quality_report.txt` after every ingestion run.
